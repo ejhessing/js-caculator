@@ -7,7 +7,7 @@
 //Varibles
 var equation = [];
 var x, y;
-var currentAnswer;
+var currentAnswer = null;
 var temp = '';
 var currentOperator ;
 
@@ -39,6 +39,7 @@ function capture (evt) {
       y = null;
       temp = '';
       display("");
+      currentAnswer = null;
       break;
     case "CE":
       temp = temp.substring(0,temp.length - 1);
@@ -102,6 +103,9 @@ function display (text) {
 function push (num) {
   if(x === null || x === undefined) {
     x = num;
+  } else if(currentAnswer !== null) {
+    x = currentAnswer;
+    y = num;
   } else {
     y = num;
   }
