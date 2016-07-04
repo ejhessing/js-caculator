@@ -6,7 +6,8 @@
 
 //Varibles
 var equation = [];
-var currentAnswers ;
+var x, y;
+var currentAnswer;
 var temp = '';
 var currentOperator ;
 
@@ -16,11 +17,6 @@ startCalculator();
 function startCalculator () {
 
   var calculator = document.getElementById('calculator');
-
-
-
-  // console.log(calculator.rows[0]);
-  // console.log(calculator.rows[0].cells[0].innerHTML)
 
   for (var i = 0; i<calculator.rows.length; i++) {
     for (var j = 0; j<calculator.rows[i].cells.length; j++) {
@@ -39,50 +35,49 @@ function capture (evt) {
 
   switch (evt.target.innerHTML) {
     case "AC":
-      equation = [];
+      x = null;
+      y = null;
       break;
     case "CE":
-      equation.pop();
+      temp = '';
       break;
     case "=":
-      equation.push(temp);
+      push(temp);
       calculate();
+      temp ='';
       break;
     case "+":
-      equation.push(temp);
-      currentOperator = +;
-      //equation.push(evt.target.innerHTML);
+      push(temp);
+      currentOperator = "+";
       temp = '';
       break;
     case "-":
-      equation.push(temp);
-      currentOperator = -;
-      //equation.push(evt.target.innerHTML);
+      push(temp);
+      currentOperator = "-";
       temp = '';
       break;
     case "X":
-      equation.push(temp);
-      currentOperator = *;
-      //equation.push(evt.target.innerHTML);
+      push(temp);
+      currentOperator = "X";
       temp = '';
       break;
     case "/":
-      equation.push(temp);
-      currentOperator = \/;
-      //equation.push(evt.target.innerHTML);
+      push(temp);
+      currentOperator = "/";
       temp = '';
       break;
     case "%":
-      equation.push(temp);
-      currentOperator = %;
-      //equation.push(evt.target.innerHTML);
+      push(temp);
+      currentOperator = "%";
       temp = '';
       break;
     case "+/-":
       temp *= -1;
+      display(temp);
       break;
     default :
-      temp += parseInt(evt.target.innerHTML);
+      temp += evt.target.innerHTML;
+      display(temp);
   }
 
   showEquation();
@@ -90,46 +85,46 @@ function capture (evt) {
 
 
 
-function showEquation () {
+function display (text) {
   var display = document.getElementById('text');
 
-  display.innerHTML= equation.join("");
+  display.innerHTML= text;
 }
 
 
-
+function push (num) {
+  if(x === null || x === undefined) {
+    x = num;
+    console.log("x " + x);
+  } else {
+    y = num;
+    console.log("y " + y)
+  }
+}
 
 
 function calculate () {
 
-var answer = equation.reduce(function(a,b){
-  return a+b;
-},'');
+ switch (currentOperator) {
+    case "+":
+      currentAnswer = Number(x) + Number(y);
+      break;
+    case "-":
+      currentAnswer = x - y;
+      break;
+    case "X":
+      currentAnswer = x * y;
+      break;
+    case "/":
+      currentAnswer = x / y;
+      break;
+    case "%":
+      currentAnswer = x % y;
+      break;
+    default :
+      console.log("deafult on calculate");
+  }
 
-console.log(answer);
+display(currentAnswer);
 
-//need to go through array and put numbers together to form larger numbers before running the operators
-
-// var equationArray = [];
-// for (var j = 0; j < equation.length; j++) {
-//   while(typeof equation[j+1] === )
-// }
-
-
-
-//   for (var i = 0; i < equation.length; i++) {
-//       switch (equation[i]) {
-//     case "+":
-//       equation = [];
-//       break;
-//     case "CE":
-//       equation.pop();
-//       break;
-//     case "=":
-//       calculate();
-//       break;
-//     default :
-//       equation.push(evt.target.innerHTML);
-//   }
-//   }
 }
