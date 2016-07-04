@@ -16,12 +16,19 @@ h4 {
   height: 500px;
 }
 
-.display{
+#display{
   width:300px;
   margin: 10px auto;
   background: lightgrey;
   height: 30px;
   font-size: 1em;
+}
+
+#display p {
+  padding:6px;
+  letter-spacing: 2px;
+  vertical-align: middle;
+
 }
 
 table {
