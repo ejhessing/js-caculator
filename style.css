@@ -7,7 +7,7 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-h4 {
+h3 {
   text-align: center;
   padding: 10px;
   margin: 0;
@@ -23,15 +23,16 @@ h4 {
 }
 
 #display{
-  width:300px;
+  width:325px;
   margin: 5px auto 10px;
   background: lightgrey;
-  height: 30px;
-  font-size: 1em;
+  height: 40px;
+  font-size: 1.2em;
+  border-radius: 2px;
 }
 
 #display p {
-  padding:6px;
+  padding:9px;
   letter-spacing: 2px;
   vertical-align: middle;
   display: flex;
