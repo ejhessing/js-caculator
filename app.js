@@ -15,9 +15,9 @@ startCalculator();
 
 
 function startCalculator () {
-
   var calculator = document.getElementById('calculator');
 
+  //add event Listeners to all cells
   for (var i = 0; i<calculator.rows.length; i++) {
     for (var j = 0; j<calculator.rows[i].cells.length; j++) {
       calculator.rows[i].cells[j].addEventListener('click', capture);
@@ -37,9 +37,11 @@ function capture (evt) {
     case "AC":
       x = null;
       y = null;
+      display("");
       break;
     case "CE":
-      temp = '';
+      temp = temp.substring(0,temp.length - 1);
+      display(temp);
       break;
     case "=":
       push(temp);
@@ -50,26 +52,31 @@ function capture (evt) {
       push(temp);
       currentOperator = "+";
       temp = '';
+      display("+");
       break;
     case "-":
       push(temp);
       currentOperator = "-";
       temp = '';
+      display("-");
       break;
     case "X":
       push(temp);
       currentOperator = "X";
       temp = '';
+      display("X");
       break;
     case "/":
       push(temp);
       currentOperator = "/";
       temp = '';
+      display("/");
       break;
     case "%":
       push(temp);
       currentOperator = "%";
       temp = '';
+      display("%");
       break;
     case "+/-":
       temp *= -1;
@@ -80,7 +87,6 @@ function capture (evt) {
       display(temp);
   }
 
-  showEquation();
 }
 
 
@@ -88,17 +94,15 @@ function capture (evt) {
 function display (text) {
   var display = document.getElementById('text');
 
-  display.innerHTML= text;
+  display.innerHTML = text;
 }
 
 
 function push (num) {
   if(x === null || x === undefined) {
     x = num;
-    console.log("x " + x);
   } else {
     y = num;
-    console.log("y " + y)
   }
 }
 
@@ -121,8 +125,8 @@ function calculate () {
     case "%":
       currentAnswer = x % y;
       break;
-    default :
-      console.log("deafult on calculate");
+    default:
+      currentAnswer = "ERROR";
   }
 
 display(currentAnswer);
