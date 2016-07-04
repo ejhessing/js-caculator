@@ -28,6 +28,8 @@ h4 {
   padding:6px;
   letter-spacing: 2px;
   vertical-align: middle;
+  display: flex;
+  justify-content: flex-end;
 
 }
 

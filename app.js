@@ -37,6 +37,7 @@ function capture (evt) {
     case "AC":
       x = null;
       y = null;
+      temp = '';
       display("");
       break;
     case "CE":
