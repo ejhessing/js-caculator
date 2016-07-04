@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+h4 {
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+  color:white;
+}
+
+.frame {
+  margin: 40px auto;
+  background:grey;
+  width:360px;
+  height: 500px;
+}
+
+.display{
+  width:300px;
+  margin: 10px auto;
+  background: lightgrey;
+  height: 30px;
+  font-size: 1em;
+}
+
+table {
+  margin: 0 auto;
+  border-spacing: 5px;
+  text-align: center;
+}
+
+
+td {
+  width: 75px;
+  height: 75px;
+  background: white;
+  color: black;
+  border: 2px black solid;
+  border-radius: 5%;
+  margin: 5px 5px;
+}
