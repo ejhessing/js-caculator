@@ -35,9 +35,10 @@ function capture (evt) {
 
   switch (evt.target.innerHTML) {
     case "AC":
+    equation = [];
+      temp = '';
       x = null;
       y = null;
-      temp = '';
       display("");
       currentAnswer = null;
       break;
@@ -48,41 +49,41 @@ function capture (evt) {
     case "=":
       push(temp);
       calculate();
-      temp ='';
       break;
     case "+":
       push(temp);
       currentOperator = "+";
+      push(currentOperator);
       temp = '';
       display("+");
       break;
     case "-":
       push(temp);
       currentOperator = "-";
+      push(currentOperator);
       temp = '';
       display("-");
       break;
     case "X":
       push(temp);
       currentOperator = "X";
+      push(currentOperator);
       temp = '';
       display("X");
       break;
     case "/":
       push(temp);
       currentOperator = "/";
+      push(currentOperator);
       temp = '';
       display("/");
       break;
     case "%":
       push(temp);
       currentOperator = "%";
+      push(currentOperator);
       temp = '';
       display("%");
-      break;
-    case "+/-":
-      temp *= -1;
-      display(temp);
       break;
     default :
       temp += evt.target.innerHTML;
@@ -95,45 +96,58 @@ function capture (evt) {
 
 function display (text) {
   var display = document.getElementById('text');
-
   display.innerHTML = text;
 }
 
 
-function push (num) {
-  if(x === null || x === undefined) {
-    x = num;
-  } else if(currentAnswer !== null) {
-    x = currentAnswer;
-    y = num;
-  } else {
-    y = num;
-  }
+function push (item) {
+  equation.push(item);
+  console.log(equation);
+
+  // if(x === null || x === undefined) {
+  //   x = num;
+  // } else if(currentAnswer !== null) {
+  //   x = currentAnswer;
+  //   y = num;
+  // } else {
+  //   y = num;
+  // }
 }
 
 
 function calculate () {
+for(var i =0; i<equation.length; i++) {
+console.log(equation.length + " " + i)
+  if(!isNaN(equation[i])) {
+    if(x === null || x === undefined) {
+      x = equation[i];
+    } else if(currentAnswer !== null) {
+      x = currentAnswer;
+      y = equation[i];
+    } else {
+       y = equation[i];
+     }
+ }
 
- switch (currentOperator) {
+  switch (equation[i]) {
     case "+":
-      currentAnswer = Number(x) + Number(y);
+    console.log( "+ " + (Number(x) + Number(equation[i+1])))
+      currentAnswer = Number(x) + Number(equation[i+1]);
       break;
     case "-":
-      currentAnswer = x - y;
+      currentAnswer = Number(x) - Number(equation[i+1]);
       break;
     case "X":
-      currentAnswer = x * y;
+      currentAnswer = Number(x) * Number(equation[i+1]);
       break;
     case "/":
-      currentAnswer = x / y;
+      currentAnswer = Number(x) / Number(equation[i+1]);
       break;
     case "%":
-      currentAnswer = x % y;
+      currentAnswer = Number(x) % Number(equation[i+1]);
       break;
-    default:
-      currentAnswer = "ERROR";
   }
-
+  
+}
 display(currentAnswer);
-
 }
