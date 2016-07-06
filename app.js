@@ -23,56 +23,27 @@ function startCalculator () {
 
 
 function capture (evt) {
+  var clicked = evt.target.innerHTML;
+  var symbol = /[+\-X%/]/
 
-
-  switch (evt.target.innerHTML) {
-    case "AC":
-      reset();
-      break;
-    case "CE":
-      temp = temp.substring(0,temp.length - 1);
-      display(temp);
-      break;
-    case "=":
-      push(temp * sign);
-      calculate();
-      break;
-    case "+":
-      push(temp * sign);
-      push("+");
-      temp = '';
-      display("+");
-      break;
-    case "-":
-      push(temp * sign);
-      push("-");
-      temp = '';
-      display("-");
-      break;
-    case "X":
-      push(temp * sign);
-      push("X");
-      temp = '';
-      display("X");
-      break;
-    case "/":
-      push(temp * sign);
-      push("/");
-      temp = '';
-      display("/");
-      break;
-    case "%":
-      push(temp * sign);
-      push("%");
-      temp = '';
-      display("%");
-      break;
-    case "+/-":
+  if(clicked === "AC"){
+    reset();
+  } else if(clicked === "CE"){
+    temp = temp.substring(0,temp.length - 1);
+    display(temp);
+  } else if(clicked === "=") {
+    addToEquation(temp * sign);
+    calculate();
+  } else if(clicked === "+/-"){
       sign *= -1;
-      break;
-    default :
-      temp += evt.target.innerHTML;
-      display(temp);
+  } else if(symbol.test(clicked)){
+      addToEquation(temp * sign);
+      addToEquation(clicked);
+      temp = '';
+      display(clicked);
+  } else {
+    temp += evt.target.innerHTML;
+    display(temp);
   }
 
 }
@@ -85,7 +56,7 @@ function display (text) {
 }
 
 
-function push (item) {
+function addToEquation (item) {
   equation.push(item);
   sign = 1;
 }
@@ -127,7 +98,7 @@ function calculate () {
   equation = ["currentAnswer"];
 }
 
-function reset () {
+function reset() {
       equation = [];
       temp = '';
       x = null;
@@ -135,3 +106,70 @@ function reset () {
       display("");
       currentAnswer = null;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function capture (evt) {
+
+
+//   switch (evt.target.innerHTML) {
+//     case "AC":
+//       reset();
+//       break;
+//     case "CE":
+//       temp = temp.substring(0,temp.length - 1);
+//       display(temp);
+//       break;
+//     case "=":
+//       addToEquation(temp * sign);
+//       calculate();
+//       break;
+//     case "+":
+//       addToEquation(temp * sign);
+//       addToEquation("+");
+//       temp = '';
+//       display("+");
+//       break;
+//     case "-":
+//       addToEquation(temp * sign);
+//       addToEquation("-");
+//       temp = '';
+//       display("-");
+//       break;
+//     case "X":
+//       addToEquation(temp * sign);
+//       addToEquation("X");
+//       temp = '';
+//       display("X");
+//       break;
+//     case "/":
+//       addToEquation(temp * sign);
+//       addToEquation("/");
+//       temp = '';
+//       display("/");
+//       break;
+//     case "%":
+//       addToEquation(temp * sign);
+//       addToEquation("%");
+//       temp = '';
+//       display("%");
+//       break;
+//     case "+/-":
+//       sign *= -1;
+//       break;
+//     default :
+//       temp += evt.target.innerHTML;
+//       display(temp);
+//   }
+
+// }
