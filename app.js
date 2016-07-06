@@ -1,8 +1,3 @@
-// Need to get all the html elements
-// Create a currentEquation and currentTotal that will display
-// As buttons pushed, it will add to the current equation
-// The display can only show so many numbers
-// Current Equation could be an array that keeps track of everything pushed
 
 //Varibles
 var equation = [];
@@ -28,20 +23,11 @@ function startCalculator () {
 
 
 function capture (evt) {
-  // Check if clear (CE) or all clear (AC)
-  // if ac clear the array
-  // else if ce, clear last entry into array
-  // else if equals then do the equation
-  // or add into array
+
 
   switch (evt.target.innerHTML) {
     case "AC":
-    equation = [];
-      temp = '';
-      x = null;
-      y = null;
-      display("");
-      currentAnswer = null;
+      reset();
       break;
     case "CE":
       temp = temp.substring(0,temp.length - 1);
@@ -53,36 +39,31 @@ function capture (evt) {
       break;
     case "+":
       push(temp * sign);
-      currentOperator = "+";
-      push(currentOperator);
+      push("+");
       temp = '';
       display("+");
       break;
     case "-":
       push(temp * sign);
-      currentOperator = "-";
-      push(currentOperator);
+      push("-");
       temp = '';
       display("-");
       break;
     case "X":
       push(temp * sign);
-      currentOperator = "X";
-      push(currentOperator);
+      push("X");
       temp = '';
       display("X");
       break;
     case "/":
       push(temp * sign);
-      currentOperator = "/";
-      push(currentOperator);
+      push("/");
       temp = '';
       display("/");
       break;
     case "%":
       push(temp * sign);
-      currentOperator = "%";
-      push(currentOperator);
+      push("%");
       temp = '';
       display("%");
       break;
@@ -107,15 +88,6 @@ function display (text) {
 function push (item) {
   equation.push(item);
   sign = 1;
-
-  // if(x === null || x === undefined) {
-  //   x = num;
-  // } else if(currentAnswer !== null) {
-  //   x = currentAnswer;
-  //   y = num;
-  // } else {
-  //   y = num;
-  // }
 }
 
 
@@ -128,8 +100,8 @@ function calculate () {
         x = currentAnswer;
         y = equation[i];
       } else {
-         y = equation[i];
-       }
+        y = equation[i];
+      }
    }
 
     switch (equation[i]) {
@@ -153,4 +125,13 @@ function calculate () {
   }
   display(currentAnswer);
   equation = ["currentAnswer"];
+}
+
+function reset () {
+      equation = [];
+      temp = '';
+      x = null;
+      y = null;
+      display("");
+      currentAnswer = null;
 }
