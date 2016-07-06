@@ -75,25 +75,28 @@ function calculate () {
       }
    }
 
-    switch (equation[i]) {
-      case "+":
-        currentAnswer = Number(x) + Number(equation[i+1]);
-        break;
-      case "-":
-        currentAnswer = Number(x) - Number(equation[i+1]);
-        break;
-      case "X":
-        currentAnswer = Number(x) * Number(equation[i+1]);
-        break;
-      case "/":
-        currentAnswer = Number(x) / Number(equation[i+1]);
-        break;
-      case "%":
-        currentAnswer = Number(x) % Number(equation[i+1]);
-        break;
-    }
+   currentAnswer = runLogic(equation[i], Number(x), Number(equation[i+1]));
+
+    // switch (equation[i]) {
+    //   case "+":
+    //     currentAnswer = Number(x) + Number(equation[i+1]);
+    //     break;
+    //   case "-":
+    //     currentAnswer = Number(x) - Number(equation[i+1]);
+    //     break;
+    //   case "X":
+    //     currentAnswer = Number(x) * Number(equation[i+1]);
+    //     break;
+    //   case "/":
+    //     currentAnswer = Number(x) / Number(equation[i+1]);
+    //     break;
+    //   case "%":
+    //     currentAnswer = Number(x) % Number(equation[i+1]);
+    //     break;
+    // }
 
   }
+  console.log(currentAnswer)
   display(currentAnswer);
   equation = ["currentAnswer"];
 }
@@ -108,6 +111,26 @@ function reset() {
 }
 
 
+function runLogic (symbol, x, y) {
+  switch (symbol) {
+    case "+":
+      currentAnswer = x + y;
+      break;
+    case "-":
+      currentAnswer = x - y;
+      break;
+    case "X":
+      currentAnswer = x * y;
+      break;
+    case "/":
+      currentAnswer = x / y;
+      break;
+    case "%":
+      currentAnswer = x % y;
+      break;
+  }
+  return currentAnswer;
+}
 
 
 
